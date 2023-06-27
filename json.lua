@@ -13,6 +13,8 @@ end
 local apiUrl = "https://dummyjson.com/products/1"
 
 local jsonData, error = fetchJSON(apiUrl)
+print("jsonData", jsonData)
+
 if jsonData then
   local decodedData = json.decode(jsonData)
 
