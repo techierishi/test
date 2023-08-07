@@ -1,31 +1,20 @@
-local http = require("socket.http")
-local json = require("cjson")
+local json = require("json")
+	local http = require("http")
+		
+	function main()
+		local response, err = http.request("GET", "https://reqres.in/api/users?page=2")
+		if err then
+			return nil, err
+		end
+		local res = response.body
 
-function fetchJSON(url)
-  local response, status, headers = http.request(url)
-  if status == 200 then
-    return response
-  else
-    return nil, "Failed to fetch JSON: " .. status
-  end
-end
+		local jsonObj = json.decode(res)
+		local jsonStr = json.encode(jsonObj["data"])
 
-local apiUrl = "https://dummyjson.com/products/1"
+		print("Hello")
+		print(jsonStr)
 
-local jsonData, error = fetchJSON(apiUrl)
-print("jsonData", jsonData)
+		return jsonStr
+	end
 
-if jsonData then
-  local decodedData = json.decode(jsonData)
-
-  if decodedData and type(decodedData) == "table" then
-    print("JSON data:")
-    for key, value in pairs(decodedData) do
-      print(key, value)
-    end
-  else
-    print("Failed to parse JSON data.")
-  end
-else
-  print("Error:", error)
-end
+	main()
