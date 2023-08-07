@@ -11,7 +11,7 @@ function main()
 	local jsonObj = json.decode(res)
 	local jsonStr = json.encode(jsonObj["data"])
 
-	print("Hello")
+	print("Hello world")
 	print(jsonStr)
 
 	return jsonStr
